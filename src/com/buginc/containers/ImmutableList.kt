@@ -5,15 +5,11 @@ import java.util.*
 //** ** Created by DeveloperHacker ** **//
 //* https://github.com/DeveloperHacker *//
 
-class ImmutableList<T> : List<T> {
-
-    private val memory: ArrayList<T>
-
-    constructor(list: List<T>) {
-        memory = ArrayList(list)
-    }
+class ImmutableList<T>(list: List<T>) : List<T> {
 
     constructor(vararg list: T) : this(list.toList())
+
+    private val memory = ArrayList<T>(list)
 
     override val size: Int
         get() = memory.size

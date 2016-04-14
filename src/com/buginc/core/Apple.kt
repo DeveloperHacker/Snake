@@ -6,7 +6,7 @@ import com.buginc.math.Vector
 //** ** Created by DeveloperHacker ** **//
 //* https://github.com/DeveloperHacker *//
 
-class Apple constructor(val name: String, val startMask: Figure, val startCalories: Double, val loseCalories: Double) {
+class Apple (val name: String, val startMask: Figure, val startCalories: Double, val loseCalories: Double) {
 
     var calories = startCalories
         private set

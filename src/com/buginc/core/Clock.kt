@@ -3,7 +3,7 @@ package com.buginc.core
 //** ** Created by DeveloperHacker ** **//
 //* https://github.com/DeveloperHacker *//
 
-class Clock constructor(startTime: Double, private val maxTime: Double, startDTime: Double) {
+class Clock (startTime: Double, private val maxTime: Double, startDTime: Double) {
 
     var time = startTime
         private set

@@ -9,7 +9,7 @@ import javax.swing.Timer
 //** ** Created by DeveloperHacker ** **//
 //* https://github.com/DeveloperHacker *//
 
-data class Controller constructor(
+data class Controller (
         val snake: Snake,
         var gamePause: Boolean,
         var gameInfo: Boolean,

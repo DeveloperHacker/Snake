@@ -6,7 +6,7 @@ import java.util.*
 //** ** Created by DeveloperHacker ** **//
 //* https://github.com/DeveloperHacker *//
 
-data class Figure constructor(var position: Vector, val outline: ImmutableList<Vector>, val eqError: Double) {
+data class Figure (var position: Vector, val outline: ImmutableList<Vector>, val eqError: Double) {
 
     constructor(figure: Figure, eqError: Double = figure.eqError)
     : this(figure.position, figure.outline, eqError)

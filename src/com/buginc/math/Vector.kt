@@ -5,7 +5,7 @@ import java.util.*
 //** ** Created by DeveloperHacker ** **//
 //* https://github.com/DeveloperHacker *//
 
-data class Vector constructor(val x: Double, val y: Double) {
+data class Vector (val x: Double, val y: Double) {
 
     var abs: Double = -1.0
         get() {

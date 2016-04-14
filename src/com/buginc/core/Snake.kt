@@ -7,7 +7,7 @@ import java.util.*
 //** ** Created by DeveloperHacker ** **//
 //* https://github.com/DeveloperHacker *//
 
-class Snake constructor(
+class Snake (
         n: Vector,
         startLocation: Vector, startLen: Double, startSpeed: Vector,
         val maxDeviation: Double, val eqError: Double

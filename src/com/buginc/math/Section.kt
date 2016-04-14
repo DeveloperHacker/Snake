@@ -3,7 +3,7 @@ package com.buginc.math
 //** ** Created by DeveloperHacker ** **//
 //* https://github.com/DeveloperHacker *//
 
-data class Section constructor(val first: Vector, val second: Vector) {
+data class Section (val first: Vector, val second: Vector) {
 
     constructor(x1: Double, y1: Double, x2: Double, y2: Double) : this(Vector(x1, y1), Vector(x2, y2))
 

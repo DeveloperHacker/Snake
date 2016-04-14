@@ -5,7 +5,7 @@ import javax.swing.*
 //** ** Created by DeveloperHacker ** **//
 //* https://github.com/DeveloperHacker *//
 
-class MainWindow constructor(title: String, x: Int, y: Int, width: Int, height: Int) : JFrame(title) {
+class MainWindow (title: String, x: Int, y: Int, width: Int, height: Int) : JFrame(title) {
 
     init {
         val panel = GamePanel()
