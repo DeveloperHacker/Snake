@@ -1,7 +1,6 @@
 package com.buginc.core
 
 import com.buginc.containers.ImmutableList
-import com.buginc.math.Figure
 import com.buginc.math.Section
 import com.buginc.math.Vector
 import java.awt.event.ActionListener
@@ -16,7 +15,7 @@ class Game {
     private val moveCycleTime = 20
     private val ableCycleTime = 20
 
-    private val random = Random(20)
+    private val random = Random()
 
     var score: Int = 0
         private set
@@ -63,7 +62,7 @@ class Game {
             if (apple.isInside(snake.position)!!) {
                 snake.saturate(apple.calories)
                 score += apple.calories.toInt()
-                if (apple.name == "Standard") new = true
+                if (apple.name == "standard") new = true
                 it.remove()
                 continue
             }
@@ -71,26 +70,8 @@ class Game {
             if (apple.calories == 0.0) it.remove()
         }
         if (new) {
-            val mask = Figure(APPLE.maskStandardApple)
-            mask.position = Vector.Companion.random(
-                    x + mask.width(),
-                    x + width - mask.width(),
-                    y + mask.height(),
-                    y + height - mask.height(),
-                    random
-            )
-            apples.add(Apple("Standard", mask, APPLE.standardCalories, 0.0))
-            if (random.nextInt(APPLE.chanceBigApple) == 0) {
-                val bigMask = Figure(APPLE.maskBigApple)
-                bigMask.position = Vector.Companion.random(
-                        x + bigMask.width(),
-                        x + width - bigMask.width(),
-                        y + bigMask.height(),
-                        y + height - bigMask.height(),
-                        random
-                )
-                apples.add(Apple("Big", bigMask, APPLE.bigCalories, APPLE.losingCalories))
-            }
+            apples.add(standardApple(x, y, width, height, random))
+            if (random.nextInt(chanceBigApple) == 0) apples.add(bigApple(x, y, width, height, random))
         }
         var unallocatedLength = snake.speed.abs
         var prevPi: Pair<Vector, Vector>? = null
@@ -124,19 +105,10 @@ class Game {
         this.width = width
         this.height = height
         score = 0
-        snake = Snake(
-                SNAKE.directSnake,
-                SNAKE.startLocation,
-                SNAKE.startLength,
-                SNAKE.startSpeed,
-                SNAKE.maxDeviation,
-                eqError
-        )
-        controller = Controller(snake, false, false, true, ableCycleTime)
+        snake = snake()
         apples = ArrayList()
-        val mask = Figure(APPLE.maskStandardApple)
-        mask.position = Vector.random(x + mask.width(), x + width - mask.width(), y + mask.height(), y + height - mask.height(), random)
-        apples.add(Apple("Standard", mask, APPLE.standardCalories, 0.0))
+        apples.add(standardApple(x, y, width, height, random))
+        controller = Controller(snake, false, false, true, ableCycleTime)
         moveClock = Timer(moveCycleTime, ActionListener {
             if (!controller.gamePause) over = next()
             if (over) stop()
@@ -150,43 +122,5 @@ class Game {
     fun stop() {
         moveClock.stop()
         controller.stop()
-    }
-
-    companion object {
-
-        const val eqError = 0.01
-
-        object SNAKE {
-            val startSpeed = Vector(0, 5)
-            val directSnake = -startSpeed()
-            val startLocation = Vector(750, 250)
-            const val startLength = 200.0
-            const val maxDeviation = Math.PI / 16.0
-        }
-
-        object APPLE {
-            const val standardCalories = 10.0
-            const val bigCalories = 50.0
-            const val losingCalories = 0.4
-            const val standardRadius = 10.0
-            const val bigRadius = 50.0
-            const val standardQVertexes = 10
-            const val bigQVertexes = 50
-            const val chanceBigApple = 10
-            val maskStandardApple = Figure(
-                    Vector(),
-                    APPLE.standardQVertexes,
-                    APPLE.standardRadius,
-                    0.0,
-                    eqError
-            )
-            val maskBigApple = Figure(
-                    Vector(),
-                    APPLE.bigQVertexes,
-                    APPLE.bigRadius,
-                    0.0,
-                    eqError
-            )
-        }
     }
 }
